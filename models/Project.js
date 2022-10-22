@@ -1,5 +1,6 @@
 const mongoose = require('mongoose') 
 const projectSchema = mongoose.Schema({
+    name: {type: String, required: true, trim: true},
     project_img: {url: String, filename: String},
     description: {type: String, required: true, trim: true},
     category: {type: mongoose.Schema.Types.ObjectId, ref: 'Category'},

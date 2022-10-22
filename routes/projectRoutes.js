@@ -7,8 +7,8 @@ const isAdmin = require('../middlewares/isAdmin')
 const { addProject, listProjects, deleteProject, editProject } = require('../controllers/projectController')
 
 
-router.post('/new', isAdmin, config.single('project_img'), addProject)
+router.post('/new', config.single('project_img'), isAdmin, addProject)
 router.get('/all', listProjects)
-router.patch('/:project_id/edit', isAdmin, config.single('project_img'), editProject)
+router.post('/:project_id/edit', isAdmin, editProject)
 router.delete('/:project_id/delete', isAdmin, deleteProject)
 module.exports = router
