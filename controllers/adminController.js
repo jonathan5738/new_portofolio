@@ -23,6 +23,7 @@ const loginAdmin = async (req, res, next) => {
 }
 const changePassword = async (req, res, next) => {
     const {oldPassword, newPassword, confirmPassword} = req.body 
+    console.log(req.body)
     try {
         if(newPassword !== confirmPassword) {
             return res.status(400).send({error: 'both password must match'})

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose') 
 const PresentationSchema = mongoose.Schema({
-    name: { type: String, required: true, trim: true},
+    title: { type: String, required: true, trim: true},
     content: {type: String, required: true, trim: true},
     skills: [String]
 })

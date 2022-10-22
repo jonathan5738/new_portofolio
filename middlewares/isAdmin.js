@@ -6,6 +6,7 @@ const isAdmin = async (req, res, next) => {
         const decode = jwt.verify(token, process.env.JWT_SECRET)
         const admin = await Admin.findById({_id: decode._id})
         if(!admin) return res.status(404).send({error: 'admin not found'})
+        if(!admin._id.equals(process.env.ADMIN_ID)) return res.status(403).send({error: 'unauthorized action'})
         req.admin = admin
         next()
     } catch(err) {
