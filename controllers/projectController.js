@@ -34,6 +34,23 @@ const listProjects = async (req, res, next) => {
         return res.status(500).send({ error: err.message })
     }
 }
+const listProjectPublic = async (req, res, next) => {
+    const { category } = req.query
+    const cate = await Category.findOne({name: category}).populate('projects')
+    if(!cate) return res.status(404).send({error: 'error not found'})
+    const projects = cate.projects 
+    return res.status(200).send(projects)
+}
+
+const projectDetail = async (req, res, next) => {
+    const {project_id} = req.params 
+    try{
+        const project = await Project.findById({_id: project_id})
+        return res.status(200).send(project)
+    } catch(err){
+        return res.status(500).send({ error: err.message })
+    }
+}
 
 const editProject = async (req, res, next) => {
     const {project_id} = req.params 
@@ -58,5 +75,6 @@ const deleteProject = async (req, res, next) => {
 }
 
 module.exports = {
-    addProject, listProjects, editProject, deleteProject
+    addProject, listProjects, editProject,
+     deleteProject, listProjectPublic, projectDetail
 }
