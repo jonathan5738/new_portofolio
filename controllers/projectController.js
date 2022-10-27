@@ -76,5 +76,5 @@ const deleteProject = async (req, res, next) => {
 
 module.exports = {
     addProject, listProjects, editProject,
-     deleteProject, listProjectPublic, projectDetail, listAllProject
+     deleteProject, listProjectPublic, projectDetail
 }
