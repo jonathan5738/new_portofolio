@@ -41,10 +41,6 @@ const listProjectPublic = async (req, res, next) => {
     const projects = cate.projects 
     return res.status(200).send(projects)
 }
-const listAllProject = async (req, res, next) => {
-    const projects = await Project.find({})
-    return res.status(200).send(projects)
-}
 
 const projectDetail = async (req, res, next) => {
     const {project_id} = req.params 
