@@ -11,16 +11,17 @@ const presentationRoutes = require('./routes/presentationRoutes')
 const categoryRoutes = require('./routes/categoryRoutes')
 const projectRoutes = require('./routes/projectRoutes')
 
-var whitelist = [process.env.ALLOWED_CLIENT_URL, process.env.ALLOWED_BACKEND_URL]
-var corsOptions = {
-  origin: function (origin, callback) {
-    if (whitelist.indexOf(origin) !== -1) {
-      callback(null, true)
-    } else {
-      callback(new Error('Not allowed by CORS'))
-    }
-  }
-}
+// var whitelist = [process.env.ALLOWED_CLIENT_URL, process.env.ALLOWED_BACKEND_URL]
+// var corsOptions = {
+//   origin: function (origin, callback) {
+//     if (whitelist.indexOf(origin) !== -1) {
+//       callback(null, true)
+//     } else {
+//       callback(new Error('Not allowed by CORS'))
+//     }
+//   }
+// }
+const corsOptions = {}
 app.use(cors(corsOptions))
 app.use(express.json()) 
 app.use(express.urlencoded({ extended: true })) 
