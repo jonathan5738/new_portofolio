@@ -11,7 +11,7 @@ const presentationRoutes = require('./routes/presentationRoutes')
 const categoryRoutes = require('./routes/categoryRoutes')
 const projectRoutes = require('./routes/projectRoutes')
 
-var whitelist = [process.env.ALLOWED_CLIENT_URL]
+var whitelist = [process.env.ALLOWED_CLIENT_URL, process.env.ALLOWED_BACKEND_URL]
 var corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {
