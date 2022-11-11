@@ -21,6 +21,8 @@ const editCategory = async (req, res, next) => {
     const {category_id} = req.params 
     const {name} = req.body
     try{
+        let foundCategory = await Category.findById({_id: category_id})
+        if(!foundCategory) return res.status(404).send({error: 'category not found'})
         const category = await Category.findByIdAndUpdate({_id: category_id}, {name}, {new: true})
         return res.status(200).send(category)
     } catch(err){
@@ -30,6 +32,8 @@ const editCategory = async (req, res, next) => {
 const deleteCategory = async (req, res, next) => {
     const {category_id} = req.params 
     try{
+        const foundCategory = await Category.findById({_id: category_id})
+        if(!foundCategory) return res.status(404).send({error: 'category not found'})
         await Category.findByIdAndDelete({_id: category_id})
         return res.status(200).send({message: 'category successfully deleted'})
     } catch(err){

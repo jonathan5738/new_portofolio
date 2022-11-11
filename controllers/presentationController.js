@@ -21,6 +21,10 @@ const fetchPresentation = async (req, res, next) => {
 }
 const editPresentation = async (req, res, next) => {
     const {presentation_id} = req.params 
+    const allowedFields = ['title', 'content', 'skills']
+    const receivedFields = Object.keys(req.body)
+    const isvalid = receivedFields.every(field => allowedFields.includes(field))
+    if(!isvalid) return res.status(400).send({error: 'invalid field sent'})
     const {title, content, skills} = req.body
     try{
         const presentation = await Presentation.findByIdAndUpdate({_id: presentation_id},
