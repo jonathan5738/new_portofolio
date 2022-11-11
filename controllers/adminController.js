@@ -23,7 +23,6 @@ const loginAdmin = async (req, res, next) => {
 }
 const changePassword = async (req, res, next) => {
     const {oldPassword, newPassword, confirmPassword} = req.body 
-    console.log(req.body)
     try {
         if(newPassword !== confirmPassword) {
             return res.status(400).send({error: 'both password must match'})
@@ -31,8 +30,9 @@ const changePassword = async (req, res, next) => {
             const ismatch =  await bcrypt.compare(oldPassword, req.admin.password)
             if(!ismatch) return res.status(400).send({error: 'unable to reset password, re-enter credentials'})
             const hashedPassword = await bcrypt.hash(newPassword, 12)
-            await Admin.findByIdAndUpdate({_id: req.admin._id}, {password: hashedPassword}, {new: true})
-            return res.status(200).send({message: 'user successfully updated'})
+            const admin = await Admin.findByIdAndUpdate({_id: req.admin._id}, {password: hashedPassword}, {new: true})
+            const token = await admin.generateAuthToken()
+            return res.status(200).send(formatAdminOutput(admin._doc, token))
         }
     } catch(err) {
         return res.status(500).send({error: err.message})

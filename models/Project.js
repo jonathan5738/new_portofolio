@@ -9,5 +9,10 @@ const projectSchema = mongoose.Schema({
     github_url: {client: String, backend: String}
 }, {timestamps: true})
 
+// projectSchema.virtual('category', {
+//     ref: 'Category',
+//     localField: 'category',
+//     foreignField: '_id'
+// })
 const Project = mongoose.model('Project', projectSchema)
 module.exports = Project
